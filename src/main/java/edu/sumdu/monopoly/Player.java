@@ -30,25 +30,25 @@ public class Player {
         if(property instanceof PropertyCell) {
             PropertyCell cell = (PropertyCell)property;
             properties.add(cell);
-            colorGroups.put(
-                    cell.getColorGroup(), 
-                    new Integer(getPropertyNumberForColor(cell.getColorGroup())+1));
-        }
+			putColor(cell.getColorGroup());
+		}
         if(property instanceof RailRoadCell) {
             railroads.add(property);
-            colorGroups.put(
-                    RailRoadCell.COLOR_GROUP, 
-                    new Integer(getPropertyNumberForColor(RailRoadCell.COLOR_GROUP)+1));
-        }
+			putColor(RailRoadCell.COLOR_GROUP);
+		}
         if(property instanceof UtilityCell) {
             utilities.add(property);
-            colorGroups.put(
-                    UtilityCell.COLOR_GROUP, 
-                    new Integer(getPropertyNumberForColor(UtilityCell.COLOR_GROUP)+1));
-        }
+			putColor(UtilityCell.COLOR_GROUP);
+		}
         setMoney(getMoney() - amount);
     }
-	
+
+	private void putColor(String cell) {
+		colorGroups.put(
+				cell,
+				getPropertyNumberForColor(cell) + 1);
+	}
+
 	public boolean canBuyHouse() {
 		return (getMonopolies().length != 0);
 	}
@@ -74,9 +74,7 @@ public class Player {
 			}
 			else {
 				player.properties.add(cell);
-				colorGroups.put(
-						cell.getColorGroup(), 
-						new Integer(getPropertyNumberForColor(cell.getColorGroup())+1));
+				putColor(cell.getColorGroup());
 			}
 		}
 		properties.clear();
